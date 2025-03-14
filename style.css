@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: (49, 46, 46);
+    display: grid;
+    align-items: center;
+    margin: 0 0 15px;
+    padding: 0px 0px;
+    width: 100%;
+    position: relative;
+    grid-template-columns: 90% 10%;
+    justify-items: center;
+}
+
+#menu {
+    display: flex;
+    border-color: #1A1D22;
+}
+
+.botao {
+    display: flex;
+    align-items: center;
+}
+    
+.menu {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.menu:checked ~ .links {
+    display: block;
+}
+
+.links {
+    display: none;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.links li {
+    margin-bottom: 10px;
+}
+
+.links a {
+    text-decoration: none;
+    color: #cbcbcb;
+}
+
+#check {
+    cursor: pointer;
+}
