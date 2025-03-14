@@ -4,66 +4,66 @@ body {
 }
 
 header {
-    background-color: (49, 46, 46);
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+    background-color: #333;
+    grid-template-columns: 95% 5%;
     display: grid;
-    align-items: center;
-    margin: 0 0 15px;
-    padding: 0px 0px;
-    width: 100%;
+}
+
+h1 {
+    color: #fff;
+}
+
+.hamburguer {
     position: relative;
-    grid-template-columns: 90% 10%;
-    justify-items: center;
 }
 
-#menu {
-    display: flex;
-    border-color: #1A1D22;
-}
-
-.botao {
+.botao-menu {
     display: flex;
     align-items: center;
+    margin: 0 auto;
 }
-    
-.menu {
-    position: absolute;
-    opacity: 0;
+
+.menu-btn {
+    font-size: 24px;
+    color: white;
     cursor: pointer;
-    height: 0;
-    width: 0;
+    user-select: none;
 }
 
-.menu:checked ~ .links {
-    display: block;
-}
-
-.menu:checked + label + .links {
-    display: block;
+.menu {
+    list-style: none;
     position: absolute;
-    top: 70%;
-    right: 30;
-    background-color: #1A1D22;
-    border-radius: 0 0 10px 10px;
-    z-index: 1;
-    padding: 10px;
-  }
-
-.links {
-    display: none;
+    right: 0;
+    top: 40px;
+    background: #333;
+    width: 150px;
     padding: 0;
     margin: 0;
-    list-style: none;
+    display: none;
+    border-radius: 5px;
 }
 
-.links li {
-    margin-bottom: 10px;
+.menu li {
+    text-align: center;
+    padding: 10px;
 }
 
-.links a {
+.menu li a {
+    color: white;
     text-decoration: none;
-    color: #cbcbcb;
+    display: block;
 }
 
-#check {
-    cursor: pointer;
+.menu li:hover {
+    background: #444;
+}
+#menu-toggle {
+    display: none;
+}
+
+#menu-toggle:checked + .menu-btn + .menu {
+    display: block;
 }
