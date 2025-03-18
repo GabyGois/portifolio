@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     header.style.gridTemplateColumns = '30% 65% 5%';
   } else if (path.includes('biologia.html')) {
     novaCor = '#27391C';
-  } else {
     header.style.gridTemplateColumns = '30% 65% 5%';
+  } else {
+    header.style.gridTemplateColumns = '95% 5%';
     novaCor = '#333'; // cor padrão para a página index
   }
 
