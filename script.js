@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Verifica se a URL contem o texto passado, verificando a página no processo
   if (path.includes('fisica.html')) {
-    novaCor = '#FFA725';
+    novaCor = '#F0A04B';
   } else if (path.includes('matematica.html')) {
     novaCor = '#161179';
   } else if (path.includes('quimica.html')) {
-    novaCor = '#211C84';
+    novaCor = '#493D9E';
   } else if (path.includes('biologia.html')) {
     novaCor = '#27391C';
   } else {
