@@ -28,12 +28,9 @@ h1 {
   
 .materia-links ul {
     gap: 100px;                  
-    margin: 0 12rem 0 0;  
+    margin: 0 24rem 0 0;  
     display: flex;  
-}
-
-.materia-links ul li {
-    text-decoration: none;               
+    text-decoration: none;  
 }
 
 .materia-links a {
