@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     novaCor = '#27391C';
     header.style.gridTemplateColumns = '30% 65% 5%';
   } else {
-    header.style.gridTemplateColumns = '95% 5%';
+    header.style.gridTemplateColumns = '95% 5%'; // grid padrão para a página index
     novaCor = '#333'; // cor padrão para a página index
   }
 
