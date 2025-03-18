@@ -3,15 +3,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const path = window.location.pathname; // captura a url da pagina
     let novaCor = '';
   
-    // Verifica se a URL contem o texto passado, verificando a página
+    // Verifica se a URL contem o texto passado, verificando a página no processo
     if (path.includes('fisica.html')) {
-      novaCor = 'orange';
+      novaCor = '#FFA725';
     } else if (path.includes('matematica.html')) {
-      novaCor = 'red';
+      novaCor = '#161179';
     } else if (path.includes('quimica.html')) {
-      novaCor = 'green';
+      novaCor = '#211C84';
     } else if (path.includes('biologia.html')) {
-      novaCor = 'blue';
+      novaCor = '#27391C';
     } else {
       novaCor = '#333'; // cor padrão para a página index
     }
