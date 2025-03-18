@@ -1,18 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
   // addEventListener -> ao carregar(DOMContentLoaded) a pagina(document) executa a função
   const path = window.location.pathname; // captura a url da pagina
-  let novaCor = '';
+  const header = document.querySelector('header'); // captura o header
+  let novaCor = ''; 
 
-  // Verifica se a URL contem o texto passado, verificando a página no processo
+  // Verifica se a URL contem o texto passado, verificando a página no processo e define a cor e atualiza colunas do grid
   if (path.includes('fisica.html')) {
     novaCor = '#F0A04B';
+    header.style.gridTemplateColumns = '30% 65% 5%';
   } else if (path.includes('matematica.html')) {
     novaCor = '#161179';
+    header.style.gridTemplateColumns = '30% 65% 5%';
   } else if (path.includes('quimica.html')) {
     novaCor = '#493D9E';
+    header.style.gridTemplateColumns = '30% 65% 5%';
   } else if (path.includes('biologia.html')) {
     novaCor = '#27391C';
   } else {
+    header.style.gridTemplateColumns = '30% 65% 5%';
     novaCor = '#333'; // cor padrão para a página index
   }
 
