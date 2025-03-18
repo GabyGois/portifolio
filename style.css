@@ -20,6 +20,28 @@ h1 {
     color: #fff;
 }
 
+header .materia-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0; 
+    display: flex;
+    gap: 15px;
+}
+
+header .materia-links li {
+    margin: 0;
+}
+
+header .materia-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+header .materia-links a:hover {
+    text-decoration: underline;
+}
+
 .hamburguer {
     position: relative;
 }
