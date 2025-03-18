@@ -27,7 +27,8 @@ h1 {
 }
   
 .materia-links ul {
-    gap: 150px;                  
+    list-style: none;
+    gap: 125px;                  
     margin: 0 auto;  
     display: flex;  
     text-decoration: none;  
