@@ -98,4 +98,6 @@ h1 {
 footer {
     padding: 15px;
     background-color: var(--cor-header);
+    color: white;
+    text-align: center;
 }
