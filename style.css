@@ -94,3 +94,8 @@ h1 {
 #menu-toggle:checked + .menu-btn + .menu {
     display: block;
 }
+
+footer {
+    padding: 15px;
+    background-color: var(--cor-header);
+}
