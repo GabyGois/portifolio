@@ -28,30 +28,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function adicionarTarefa(materia) {
-Swal.fire<LoginFormResult>({
-  title: 'Login Form',
-  html: `
-    <input type="text" id="username" class="swal2-input" placeholder="Username">
-    <input type="password" id="password" class="swal2-input" placeholder="Password">
-  `,
-  confirmButtonText: 'Sign in',
-  focusConfirm: false,
-  didOpen: () => {
-    const popup = Swal.getPopup()
-    usernameInput = popup.querySelector('#username')
-    passwordInput = popup.querySelector('#password') 
-    usernameInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
-    passwordInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
-  },
-  preConfirm: () => {
-    const username = usernameInput.value
-    const password = passwordInput.value
-    if (!username || !password) {
-      Swal.showValidationMessage(`Please enter username and password`)
-    }
-    return { username, password }
-  },
-})
-
+  Swal.fire({
+    title: 'Login Form',
+    html: `
+      <input type="text" id="username" class="swal2-input" placeholder="Username">
+      <input type="password" id="password" class="swal2-input" placeholder="Password">
+    `,
+    confirmButtonText: 'Sign in',
+    focusConfirm: false,
+    didOpen: () => {
+      const popup = Swal.getPopup()
+      usernameInput = popup.querySelector('#username')
+      passwordInput = popup.querySelector('#password') 
+      usernameInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+      passwordInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+    },
+    preConfirm: () => {
+      const username = usernameInput.value
+      const password = passwordInput.value
+      if (!username || !password) {
+        Swal.showValidationMessage(`Please enter username and password`)
+      }
+      return { username, password }
+    },
+  })
 }
   
