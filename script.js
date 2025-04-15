@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 document.addEventListener('DOMContentLoaded', function() {
   // addEventListener -> ao carregar(DOMContentLoaded) a pagina(document) executa a função
   const path = window.location.pathname; // captura a url da pagina
@@ -25,4 +26,32 @@ document.addEventListener('DOMContentLoaded', function() {
   // Atualiza a variável CSS no :root
   document.documentElement.style.setProperty('--cor-header', novaCor);
 });
+
+function adicionarTarefa(materia) {
+Swal.fire<LoginFormResult>({
+  title: 'Login Form',
+  html: `
+    <input type="text" id="username" class="swal2-input" placeholder="Username">
+    <input type="password" id="password" class="swal2-input" placeholder="Password">
+  `,
+  confirmButtonText: 'Sign in',
+  focusConfirm: false,
+  didOpen: () => {
+    const popup = Swal.getPopup()
+    usernameInput = popup.querySelector('#username')
+    passwordInput = popup.querySelector('#password') 
+    usernameInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+    passwordInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+  },
+  preConfirm: () => {
+    const username = usernameInput.value
+    const password = passwordInput.value
+    if (!username || !password) {
+      Swal.showValidationMessage(`Please enter username and password`)
+    }
+    return { username, password }
+  },
+})
+
+}
   
