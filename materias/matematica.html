@@ -40,6 +40,9 @@
     </header>
     <section id="tarefas">
         <button onclick="adicionarTarefa('matematica')">Adicionar Atividades/Provas</button>
+        <br>
+        <div id="lista"></div>
+
     </section>
     <footer>
         <p>© All Rigths Reserved - Portifólio 2025</p>
@@ -71,6 +74,7 @@
                         data:  dataInput.value
                     }
                     adicionaArray(mat_tarefas, nova_tarefa)
+                    recarregaLista(mat_tarefas)
                 },
             })
         }

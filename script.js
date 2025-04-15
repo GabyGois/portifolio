@@ -4,6 +4,23 @@ function adicionaArray(nome_array, tarefa) {
   nome_array.push(tarefa)
 }
 
+function recarregaLista(nome_array) {
+  lista = document.document.querySelector('#lista')
+
+  let texto_lista
+
+  nome_array.forEach(tarefa => {
+    texto_lista += `
+    <div>
+      <p>Atividade/Prova: ${tarefa.atividade}</p>
+      <p>Data: ${tarefa.data}</p>
+    </div>
+    `
+  });
+
+  lista.innerHTML = texto_lista
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   // addEventListener -> ao carregar(DOMContentLoaded) a pagina(document) executa a função
   const path = window.location.pathname; // captura a url da pagina
