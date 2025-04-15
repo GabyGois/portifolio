@@ -1,6 +1,6 @@
 tarefas_mat = []
 
-function adicionaArray(array tarefa) {
+function adicionaArray(array, tarefa) {
   array.push(tarefa)
 }
 
