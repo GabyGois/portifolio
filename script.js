@@ -1,5 +1,5 @@
-function adicionaArray(array, tarefa) {
-  array.push(tarefa)
+function adicionaArray(nome_array, tarefa) {
+  nome_array.push(tarefa)
 }
 
 document.addEventListener('DOMContentLoaded', function() {
