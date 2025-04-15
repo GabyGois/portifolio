@@ -63,14 +63,12 @@
                     dataInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
                 },
                 preConfirm: () => {
-                    const atividade = atividadeInput.value
-                    const data = dataInput.value
                     if (!atividade || !data) {
                         Swal.showValidationMessage(`Please enter atividade and data`)
                     }
                     tarefas += {
-                        atividade: atividade,
-                        data: data
+                        atividade: atividadeInput.value,
+                        data:  dataInput.value
                     }
                 },
             })
