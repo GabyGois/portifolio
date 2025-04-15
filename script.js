@@ -5,19 +5,18 @@ function adicionaArray(nome_array, tarefa) {
 }
 
 function recarregaLista(nome_array) {
-  lista = document.querySelector('#lista')
-
   let texto_lista
 
   nome_array.forEach(tarefa => {
     texto_lista += `
     <div>
-      <p>Atividade/Prova: ${tarefa.atividade}</p>
-      <p>Data: ${tarefa.data}</p>
+    <p>Atividade/Prova: ${tarefa.atividade}</p>
+    <p>Data: ${tarefa.data}</p>
     </div>
     `
   });
-
+  
+  lista = document.querySelector('#lista')
   lista.innerHTML = texto_lista
 }
 
