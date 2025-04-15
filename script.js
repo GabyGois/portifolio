@@ -1,5 +1,3 @@
-tarefas = []
-
 function adicionaArray(array, tarefa) {
   array.push(tarefa)
 }
