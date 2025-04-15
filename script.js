@@ -1,5 +1,5 @@
-import Swal from 'sweetalert2'
 tarefas = []
+
 document.addEventListener('DOMContentLoaded', function() {
   // addEventListener -> ao carregar(DOMContentLoaded) a pagina(document) executa a função
   const path = window.location.pathname; // captura a url da pagina
