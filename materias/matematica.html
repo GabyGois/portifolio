@@ -50,25 +50,25 @@
             Swal.fire({
                 title: 'Login Form',
                 html: `
-                <input type="text" id="username" class="swal2-input" placeholder="Username">
-                <input type="password" id="password" class="swal2-input" placeholder="Password">
+                <input type="text" id="atividade" class="swal2-input" placeholder="Atividade/Prova">
+                <input type="date" id="data" class="swal2-input" placeholder="Data de entrega">
             `,
                 confirmButtonText: 'Sign in',
                 focusConfirm: false,
                 didOpen: () => {
                     const popup = Swal.getPopup()
-                    usernameInput = popup.querySelector('#username')
-                    passwordInput = popup.querySelector('#password')
-                    usernameInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
-                    passwordInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+                    atividadeInput = popup.querySelector('#atividade')
+                    dataInput = popup.querySelector('#data')
+                    atividadeInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+                    dataInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
                 },
                 preConfirm: () => {
-                    const username = usernameInput.value
-                    const password = passwordInput.value
-                    if (!username || !password) {
-                        Swal.showValidationMessage(`Please enter username and password`)
+                    const atividade = atividadeInput.value
+                    const data = dataInput.value
+                    if (!atividade || !data) {
+                        Swal.showValidationMessage(`Please enter atividade and data`)
                     }
-                    return { username, password }
+                    return { atividade, data }
                 },
             })
         }
