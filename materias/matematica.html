@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
     <header>
         <div>
@@ -15,9 +17,9 @@
         </div>
         <nav class="materia-links">
             <ul>
-              <li><a href="#">Tarefas</a></li>
-              <li><a href="#">Materiais de Estudo</a></li>
-              <li><a href="#">Cards</a></li>
+                <li><a href="#">Tarefas</a></li>
+                <li><a href="#">Materiais de Estudo</a></li>
+                <li><a href="#">Cards</a></li>
             </ul>
         </nav>
         <div class="botao-menu">
@@ -43,5 +45,34 @@
         <p>© All Rigths Reserved - Portifólio 2025</p>
     </footer>
     <script src="../script.js"></script>
+    <script>
+        function adicionarTarefa(materia) {
+            Swal.fire({
+                title: 'Login Form',
+                html: `
+                <input type="text" id="username" class="swal2-input" placeholder="Username">
+                <input type="password" id="password" class="swal2-input" placeholder="Password">
+            `,
+                confirmButtonText: 'Sign in',
+                focusConfirm: false,
+                didOpen: () => {
+                    const popup = Swal.getPopup()
+                    usernameInput = popup.querySelector('#username')
+                    passwordInput = popup.querySelector('#password')
+                    usernameInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+                    passwordInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+                },
+                preConfirm: () => {
+                    const username = usernameInput.value
+                    const password = passwordInput.value
+                    if (!username || !password) {
+                        Swal.showValidationMessage(`Please enter username and password`)
+                    }
+                    return { username, password }
+                },
+            })
+        }
+    </script>
 </body>
+
 </html>
