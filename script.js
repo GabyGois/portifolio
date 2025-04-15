@@ -1,7 +1,7 @@
-tarefas = []
+tarefas_mat = []
 
-function adicionaArray(tarefa) {
-  tarefas.push(tarefa)
+function adicionaArray(array tarefa) {
+  array.push(tarefa)
 }
 
 document.addEventListener('DOMContentLoaded', function() {
