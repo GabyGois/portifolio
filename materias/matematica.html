@@ -66,10 +66,11 @@
                     if (!atividade || !data) {
                         Swal.showValidationMessage(`Please enter atividade and data`)
                     }
-                    tarefas += {
+                    nova_tarefa = {
                         atividade: atividadeInput.value,
                         data:  dataInput.value
                     }
+                    adicionaArray(nova_tarefa)
                 },
             })
         }

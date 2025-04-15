@@ -1,5 +1,9 @@
 tarefas = []
 
+function adicionaArray(tarefa) {
+  tarefas.push(tarefa)
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   // addEventListener -> ao carregar(DOMContentLoaded) a pagina(document) executa a função
   const path = window.location.pathname; // captura a url da pagina
