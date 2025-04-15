@@ -5,7 +5,7 @@ function adicionaArray(nome_array, tarefa) {
 }
 
 function recarregaLista(nome_array) {
-  lista = document.document.querySelector('#lista')
+  lista = document.querySelector('#lista')
 
   let texto_lista
 
