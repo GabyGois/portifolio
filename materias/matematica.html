@@ -53,7 +53,7 @@
                 <input type="text" id="atividade" class="swal2-input" placeholder="Atividade/Prova">
                 <input type="date" id="data" class="swal2-input" placeholder="Data de entrega">
             `,
-                confirmButtonText: 'Sign in',
+                confirmButtonText: 'Adicionar Atividade',
                 focusConfirm: false,
                 didOpen: () => {
                     const popup = Swal.getPopup()
@@ -68,7 +68,10 @@
                     if (!atividade || !data) {
                         Swal.showValidationMessage(`Please enter atividade and data`)
                     }
-                    return { atividade, data }
+                    tarefas += {
+                        atividade: atividade,
+                        data: data
+                    }
                 },
             })
         }
