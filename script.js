@@ -1,21 +1,26 @@
-// script.js
-
 let mat_tarefas = [];
 
 /**
- * Formata "aaaa-mm-dd" para "dd/mm/aaaa"
+ * Converte data ISO (aaaa-mm-dd) para dd/mm/aaaa
+ * @param {string} isoDate
+ * @returns {string}
  */
 function formatDateBR(isoDate) {
     const [y, m, d] = isoDate.split('-');
     return `${d}/${m}/${y}`;
 }
 
+/**
+ * Adiciona uma tarefa ao array se ainda não existir
+ * @param {Array} nome_array 
+ * @param {{atividade: string, data: string}} tarefa 
+ * @returns {boolean}
+ */
 function adicionaArray(nome_array, tarefa) {
     const existe = nome_array.some(item =>
         item.atividade === tarefa.atividade &&
         item.data === tarefa.data
     );
-
     if (!existe) {
         nome_array.push(tarefa);
         return true;
@@ -23,6 +28,10 @@ function adicionaArray(nome_array, tarefa) {
     return false;
 }
 
+/**
+ * Recarrega o grid de cards com as tarefas atuais
+ * @param {Array} nome_array 
+ */
 function recarregaLista(nome_array) {
     const container = document.querySelector('.conteudo-principal');
     container.innerHTML = `
@@ -37,7 +46,7 @@ function recarregaLista(nome_array) {
     nome_array.forEach((tarefa) => {
         const card = document.createElement('div');
         card.className = 'card-item';
-        card.dataset.date = tarefa.data;  // mantém ISO para cálculo
+        card.dataset.date = tarefa.data;  // mantem ISO para cálculo
 
         card.innerHTML = `
             <h4>${tarefa.atividade}</h4>
@@ -53,19 +62,30 @@ function recarregaLista(nome_array) {
         grid.appendChild(card);
     });
 
+    // Reatribui listener do Swal ao botão
     container.querySelector('#btn-adicionar').addEventListener('click', adicionarTarefa);
+
+    // Inicia atualização automática dos temporizadores
     iniciarAtualizacao();
 }
 
+/**
+ * Atualiza cada contador a cada segundo
+ */
 function iniciarAtualizacao() {
     setInterval(() => {
-        document.querySelectorAll('.contador-item').forEach(elemento => {
-            const raw = elemento.closest('.card-item').dataset.date;
-            elemento.textContent = calculaTempo(new Date(raw));
+        document.querySelectorAll('.contador-item').forEach(el => {
+            const raw = el.closest('.card-item').dataset.date;
+            el.textContent = calculaTempo(new Date(raw));
         });
     }, 1000);
 }
 
+/**
+ * Calcula tempo restante até a dataObjetivo
+ * @param {Date} dataObjetivo 
+ * @returns {string}
+ */
 function calculaTempo(dataObjetivo) {
     const agora = new Date();
     const diferenca = dataObjetivo - agora;
@@ -80,6 +100,7 @@ function calculaTempo(dataObjetivo) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Ao carregar a página, define a cor do header e vincula o botão de adicionar
     const path = window.location.pathname;
     const header = document.querySelector('header');
     let novaCor = '';
@@ -102,5 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     document.documentElement.style.setProperty('--cor-header', novaCor);
+
+    // Botão que abre o Swal permanece no HTML e é vinculado aqui
     document.getElementById('btn-adicionar').addEventListener('click', adicionarTarefa);
 });

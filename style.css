@@ -1,16 +1,12 @@
-/* style.css */
-
 :root {
     --cor-header: #333;
-    --highlight-bg: color-mix(in srgb, var(--cor-header) 40%, white);
-    --hover-border: var(--cor-header);
     /* cor padrão (index) */
 }
 
 body {
     margin: 0;
     padding: 0;
-    /* garante que o footer não sobreponha conteúdo */
+    /* garante espaço para o footer fixo */
     padding-bottom: 60px;
 }
 
@@ -25,14 +21,87 @@ h1 {
     color: #fff;
 }
 
-/* ... (demais estilos de header/menu inalterados) ... */
+.materia-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-.conteudo-principal {
-    padding: 20px;
-    max-width: 1200px;
+.materia-links ul {
+    list-style: none;
+    gap: 125px;
+    margin: 0 auto;
+    display: flex;
+    text-decoration: none;
+}
+
+.materia-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.materia-links a:hover {
+    text-decoration: underline;
+    font-size: 22px;
+}
+
+.hamburguer {
+    position: relative;
+}
+
+.botao-menu {
+    display: flex;
+    align-items: center;
     margin: 0 auto;
 }
 
+.menu-btn {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.menu {
+    list-style: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: var(--cor-header);
+    width: 150px;
+    padding: 0;
+    margin: 0;
+    display: none;
+    border-radius: 5px;
+}
+
+.menu li {
+    text-align: center;
+    padding: 10px;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.menu li:hover {
+    background: #444;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+#menu-toggle:checked + .menu-btn + .menu {
+    display: block;
+}
+
+/* REMOVIDO: .botoes-container, .botoes-wrapper, .scroll-btn e similares */
+
+/* Grid de cards em 3 colunas */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -40,12 +109,19 @@ h1 {
     margin: 20px 0;
 }
 
-/* === Estilos dos cards ajustados === */
+/* Estilo genérico (do original) */
+.botao {
+    flex-shrink: 0;
+    width: 200px;
+    /* Restante dos estilos originais */
+}
+
+/* Estilos dos cards */
 .card-item {
     background: var(--botao-inativo);
     border: 2px solid var(--botao-ativo);
     border-radius: 10px;
-    padding: 10px;              /* padding reduzido */
+    padding: 12px;               /* padding levemente menor */
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
@@ -54,20 +130,21 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
 }
-/* título maior */
+
 .card-item h4 {
-    font-size: 1.3em;
+    font-size: 1.2em;            /* título um pouco maior */
     margin: 0 0 5px;
 }
 
+/* Highlight permanente no item ativo */
 .card-item.ativo {
-    background: var(--highlight-bg);
-    border-color: var(--cor-header);
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    border: 3px solid var(--cor-header);
+    box-shadow: 0 0 6px var(--cor-header);
 }
 
+/* Hover: só borda inferior no card */
 .card-item:hover {
-    border-bottom: 3px solid var(--hover-border);
+    border-bottom: 3px solid var(--cor-header);
 }
 
 .contador-item {
@@ -75,10 +152,42 @@ h1 {
     color: var(--verde);
 }
 
+/* Mantido do original */
+.conteudo-principal {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 /* Botão de adicionar */
 .botao-adicionar {
     background-color: var(--cor-header);
-    /* ... */
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.botao-adicionar:hover {
+    background-color: color-mix(in srgb, var(--cor-header) 90%, black);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.botao-adicionar:active {
+    transform: translateY(0);
+    background-color: color-mix(in srgb, var(--cor-header) 80%, black);
 }
 
 /* Footer fixo */
