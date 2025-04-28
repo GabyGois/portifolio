@@ -42,7 +42,7 @@
         <button id="btn-adicionar" class="botao-adicionar">
             Adicionar Atividades/Provas
         </button>
-        
+
         <div class="botoes-container">
             <div class="botoes-wrapper">
                 <div class="botoes"></div>
@@ -51,7 +51,7 @@
             <button class="scroll-btn left">&lt;</button>
             <button class="scroll-btn right">&gt;</button>
         </div>
-        
+
         <div class="abas-textos"></div>
     </section>
     <footer>
@@ -59,33 +59,35 @@
     </footer>
     <script src="../script.js"></script>
     <script>
-        function adicionarTarefa(materia) {
+        function adicionarTarefa() {
             Swal.fire({
                 title: 'Formulário',
                 html: `
                 <input type="text" id="atividade" class="swal2-input" placeholder="Atividade/Prova">
                 <input type="date" id="data" class="swal2-input" placeholder="Data de entrega">
-            `,
+                `,
                 confirmButtonText: 'Adicionar Atividade',
                 focusConfirm: false,
                 didOpen: () => {
-                    const popup = Swal.getPopup()
-                    atividadeInput = popup.querySelector('#atividade')
-                    dataInput = popup.querySelector('#data')
-                    atividadeInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
-                    dataInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+                    const popup = Swal.getPopup();
+                    atividadeInput = popup.querySelector('#atividade');
+                    dataInput = popup.querySelector('#data');
+                    atividadeInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm();
+                    dataInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm();
                 },
                 preConfirm: () => {
                     const atividade = atividadeInput.value.trim();
-                    const data      = dataInput.value;
+                    const data = dataInput.value;
+
                     if (!atividade || !data) {
                         Swal.showValidationMessage('Por favor, preencha atividade e data');
                         return false;
                     }
+
                     adicionaArray(mat_tarefas, { atividade, data });
-                    recarregaLista(mat_tarefas);
+                    recarregaLista(mat_tarefas); 
                 }
-            })
+            });
         }
     </script>
 </body>

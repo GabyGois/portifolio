@@ -93,6 +93,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Atualiza a variável CSS no :root
   document.documentElement.style.setProperty('--cor-header', novaCor);
+
+  document.getElementById('btn-adicionar').addEventListener('click', function() {
+    adicionarTarefa();
+  });
 });
 
   
