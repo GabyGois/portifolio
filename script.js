@@ -120,17 +120,29 @@ function iniciarAtualizacao() {
 }
 
 function calculaTempo(dataObjetivo) {
-  const agora = new Date();
-  const diferenca = dataObjetivo - agora;
-  if (diferenca < 0) return 'Prazo Finalizado';
+    const agora = new Date();
+    const hoje = new Date(agora.getFullYear(), agora.getMonth(), agora.getDate());
+    const dataAlvo = new Date(dataObjetivo.getFullYear(), dataObjetivo.getMonth(), dataObjetivo.getDate());
+  
+    const diferenca = dataAlvo - hoje;
+  
+    if (diferenca < 0) return 'Prazo Finalizado';
 
-  const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-  const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-  const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
 
-  return `${dias}d ${horas}h ${minutos}m ${segundos}s`;
-}
+    // Se for mais de 0 dias, mostra só dias
+    if (dias > 0) {
+      return `${dias} dia${dias > 1 ? 's' : ''}`;
+    }
+    
+    const resto = dataObjetivo - agora;
+  
+    const horas = Math.floor((resto % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((resto % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((resto % (1000 * 60)) / 1000);
+  
+    return `${horas}h ${minutos}m ${segundos}s`;
+  }
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
