@@ -39,12 +39,22 @@
         </div>
     </header>
     <section id="tarefas" class="conteudo-principal">
-        <button id="btn-adicionar" class="botao-adicionar">
-          Adicionar Atividades/Provas
-        </button>
-    
+        <button id="btn-adicionar" class="botao-adicionar">Adicionar Atividades/Provas</button>
+      
+        <div class="abas-container">
+          <button id="scroll-left" class="scroll-btn">&lsaquo;</button>
+          <div class="botoes-scroll">
+            <!-- Aqui o JS irá injetar os botões (.botao) -->
+          </div>
+          <button id="scroll-right" class="scroll-btn">&rsaquo;</button>
+        </div>
+      
+        <div class="abas-textos">
+          <!-- Aqui o JS irá injetar as divs .aba-conteudo -->
+        </div>
+      
         <div id="lista"></div>
-    </section>
+      </section>
     <footer>
         <p>© All Rigths Reserved - Portifólio 2025</p>
     </footer>

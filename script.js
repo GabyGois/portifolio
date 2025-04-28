@@ -1,24 +1,88 @@
-let mat_tarefas = []
+let mat_tarefas = [];
 
-function adicionaArray(nome_array, tarefa) {
-  nome_array.push(tarefa)
-}
+// função que cria abas e conteúdos
+function recarregaAbas(array) {
+  const botoesContainer = document.querySelector('.botoes-scroll');
+  const textosContainer = document.querySelector('.abas-textos');
+  botoesContainer.innerHTML = '';
+  textosContainer.innerHTML = '';
 
-function recarregaLista(nome_array) {
-  let texto_lista = ''
+  array.forEach((tarefa, idx) => {
+    // cria botão da aba
+    const btn = document.createElement('button');
+    btn.className = 'botao';
+    btn.textContent = tarefa.atividade;
+    btn.dataset.index = idx;
+    botoesContainer.appendChild(btn);
 
-  nome_array.forEach(tarefa => {
-    texto_lista += `
-    <div>
-    <p>Atividade/Prova: ${tarefa.atividade}</p>
-    <p>Data: ${tarefa.data}</p>
-    </div>
-    `
+    // cria conteúdo da aba
+    const div = document.createElement('div');
+    div.className = 'aba-conteudo';
+    div.innerHTML = `
+      <h3 class="aba-conteudo-titulo-principal">${tarefa.atividade}</h3>
+      <h4 class="aba-conteudo-titulo-secundario">Data de entrega</h4>
+      <p class="contador">${tarefa.data}</p>
+    `;
+    textosContainer.appendChild(div);
   });
-  
-  lista = document.querySelector('#lista')
-  lista.innerHTML = texto_lista
+
+  // ativa a primeira aba por padrão, se existir
+  if (array.length > 0) {
+    botoesContainer.firstElementChild.classList.add('ativo');
+    textosContainer.firstElementChild.classList.add('ativo');
+  }
+
+  // vincula evento de clique em todos os botões
+  botoesContainer.querySelectorAll('.botao').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // remove todos os estados ativos
+      botoesContainer.querySelectorAll('.botao').forEach(b => b.classList.remove('ativo'));
+      textosContainer.querySelectorAll('.aba-conteudo').forEach(c => c.classList.remove('ativo'));
+
+      // ativa o clicado
+      btn.classList.add('ativo');
+      textosContainer.children[btn.dataset.index].classList.add('ativo');
+    });
+  });
 }
+
+// scroll com as setas
+document.getElementById('scroll-left').addEventListener('click', () => {
+  document.querySelector('.botoes-scroll').scrollBy({ left: -200, behavior: 'smooth' });
+});
+document.getElementById('scroll-right').addEventListener('click', () => {
+  document.querySelector('.botoes-scroll').scrollBy({ left:  200, behavior: 'smooth' });
+});
+
+// === seu SweetAlert para adicionar ===
+document.getElementById('btn-adicionar').addEventListener('click', () => {
+  Swal.fire({
+    title: 'Formulário',
+    html: `
+      <input type="text" id="atividade" class="swal2-input" placeholder="Atividade/Prova">
+      <input type="date" id="data" class="swal2-input" placeholder="Data de entrega">
+    `,
+    confirmButtonText: 'Adicionar Atividade',
+    focusConfirm: false,
+    didOpen: () => {
+      const popup = Swal.getPopup();
+      atividadeInput = popup.querySelector('#atividade');
+      dataInput     = popup.querySelector('#data');
+      atividadeInput.onkeyup = e => e.key === 'Enter' && Swal.clickConfirm();
+      dataInput.onkeyup      = e => e.key === 'Enter' && Swal.clickConfirm();
+    },
+    preConfirm: () => {
+      const atividade = atividadeInput.value.trim();
+      const data      = dataInput.value;
+      if (!atividade || !data) {
+        Swal.showValidationMessage('Por favor, preencha atividade e data');
+        return false;
+      }
+      mat_tarefas.push({ atividade, data });
+      recarregaAbas(mat_tarefas);
+    }
+  });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
   // addEventListener -> ao carregar(DOMContentLoaded) a pagina(document) executa a função
@@ -33,6 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
   } else if (path.includes('matematica.html')) {
     novaCor = '#161179';
     header.style.gridTemplateColumns = '30% 65% 5%';
+    recarregaAbas(mat_tarefas);
   } else if (path.includes('quimica.html')) {
     novaCor = '#493D9E';
     header.style.gridTemplateColumns = '30% 65% 5%';

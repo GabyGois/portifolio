@@ -1,5 +1,6 @@
 :root {
-    --cor-header: #333; /* cor padrão (index) */
+    --cor-header: #333;
+    /* cor padrão (index) */
 }
 
 body {
@@ -19,28 +20,28 @@ h1 {
 }
 
 .materia-links {
-    display: flex;              
-    justify-content: center;    
-    align-items: center;       
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-  
+
 .materia-links ul {
     list-style: none;
-    gap: 125px;                  
-    margin: 0 auto;  
-    display: flex;  
-    text-decoration: none;  
+    gap: 125px;
+    margin: 0 auto;
+    display: flex;
+    text-decoration: none;
 }
 
 .materia-links a {
     color: #fff;
     text-decoration: none;
-    font-size: 20px;  
+    font-size: 20px;
 }
 
 .materia-links a:hover {
     text-decoration: underline;
-    font-size: 22px; 
+    font-size: 22px;
 }
 
 .hamburguer {
@@ -87,11 +88,12 @@ h1 {
 .menu li:hover {
     background: #444;
 }
+
 #menu-toggle {
     display: none;
 }
 
-#menu-toggle:checked + .menu-btn + .menu {
+#menu-toggle:checked+.menu-btn+.menu {
     display: block;
 }
 
@@ -100,4 +102,80 @@ footer {
     background-color: var(--cor-header);
     color: white;
     text-align: center;
+}
+
+.abas-container {
+    position: relative;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.botoes-scroll {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    /* remove scroll bar visível, opcional */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.botoes-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.botao {
+    flex: 0 0 auto;
+    /* para não encolher */
+    margin-right: 0.5em;
+    font-family: 'Chakra Petch', sans-serif;
+    background-color: var(--botao-inativo);
+    color: var(--branco);
+    padding: 0.75em 1.25em;
+    border: 2px solid var(--botao-ativo);
+    border-bottom-width: 4px;
+    border-radius: 20px 20px 0 0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+}
+
+.botao.ativo {
+    background-color: var(--botao-ativo);
+    border-bottom-color: var(--verde);
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2em;
+    height: 2em;
+    background: var(--botao-ativo);
+    color: var(--branco);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#scroll-left {
+    left: 0;
+}
+
+#scroll-right {
+    right: 0;
+}
+
+.abas-textos {
+    background-color: var(--texto-fundo);
+    padding: 2em;
+    border-radius: 0 0 40px 40px;
+}
+
+.aba-conteudo {
+    display: none;
+}
+
+.aba-conteudo.ativo {
+    display: block;
 }
