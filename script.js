@@ -5,7 +5,7 @@ function adicionaArray(nome_array, tarefa) {
 }
 
 function recarregaLista(nome_array) {
-  let texto_lista
+  let texto_lista = ''
 
   nome_array.forEach(tarefa => {
     texto_lista += `
