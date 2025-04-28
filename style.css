@@ -212,3 +212,40 @@ footer {
 .detalhes-container.ativo {
     display: block;
 }
+
+.botao-adicionar {
+    background-color: var(--cor-header);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.botao-adicionar:hover {
+    background-color: color-mix(in srgb, var(--cor-header) 90%, black);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.botao-adicionar:active {
+    transform: translateY(0);
+    background-color: color-mix(in srgb, var(--cor-header) 80%, black);
+}
+
+/* Ícone opcional - adicione Font Awesome no HTML se quiser usar */
+.botao-adicionar::before {
+    content: '\f055'; /* Código do ícone de + */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
