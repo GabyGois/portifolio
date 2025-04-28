@@ -61,31 +61,27 @@
     <script>
         function adicionarTarefa() {
             Swal.fire({
-                title: 'Formulário',
+                title: 'Nova Atividade',
                 html: `
-                <input type="text" id="atividade" class="swal2-input" placeholder="Atividade/Prova">
-                <input type="date" id="data" class="swal2-input" placeholder="Data de entrega">
-                `,
-                confirmButtonText: 'Adicionar Atividade',
-                focusConfirm: false,
-                didOpen: () => {
-                    const popup = Swal.getPopup();
-                    atividadeInput = popup.querySelector('#atividade');
-                    dataInput = popup.querySelector('#data');
-                    atividadeInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm();
-                    dataInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm();
-                },
+            <input type="text" id="atividade" class="swal2-input" placeholder="Nome da atividade">
+            <input type="date" id="data" class="swal2-input">
+        `,
+                confirmButtonText: 'Adicionar',
                 preConfirm: () => {
-                    const atividade = atividadeInput.value.trim();
-                    const data = dataInput.value;
+                    const atividade = Swal.getPopup().querySelector('#atividade').value;
+                    const data = Swal.getPopup().querySelector('#data').value;
 
                     if (!atividade || !data) {
-                        Swal.showValidationMessage('Por favor, preencha atividade e data');
+                        Swal.showValidationMessage('Preencha todos os campos');
                         return false;
                     }
 
-                    adicionaArray(mat_tarefas, { atividade, data });
-                    recarregaLista(mat_tarefas); 
+                    if (adicionaArray(mat_tarefas, { atividade, data })) {
+                        recarregaLista(mat_tarefas);
+                    } else {
+                        Swal.showValidationMessage('Esta atividade já existe!');
+                        return false;
+                    }
                 }
             });
         }
