@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function() {
   } else if (path.includes('matematica.html')) {
     novaCor = '#161179';
     header.style.gridTemplateColumns = '30% 65% 5%';
-    recarregaAbas(mat_tarefas);
   } else if (path.includes('quimica.html')) {
     novaCor = '#493D9E';
     header.style.gridTemplateColumns = '30% 65% 5%';
