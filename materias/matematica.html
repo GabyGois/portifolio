@@ -39,22 +39,21 @@
         </div>
     </header>
     <section id="tarefas" class="conteudo-principal">
-        <button id="btn-adicionar" class="botao-adicionar">Adicionar Atividades/Provas</button>
-      
-        <div class="abas-container">
-          <button id="scroll-left" class="scroll-btn">&lsaquo;</button>
-          <div class="botoes-scroll">
-            <!-- Aqui o JS irá injetar os botões (.botao) -->
-          </div>
-          <button id="scroll-right" class="scroll-btn">&rsaquo;</button>
+        <button id="btn-adicionar" class="botao-adicionar">
+            Adicionar Atividades/Provas
+        </button>
+        
+        <div class="botoes-container">
+            <div class="botoes-wrapper">
+                <div class="botoes"></div>
+            </div>
+            <!-- Botões de scroll -->
+            <button class="scroll-btn left">&lt;</button>
+            <button class="scroll-btn right">&gt;</button>
         </div>
-      
-        <div class="abas-textos">
-          <!-- Aqui o JS irá injetar as divs .aba-conteudo -->
-        </div>
-      
-        <div id="lista"></div>
-      </section>
+        
+        <div class="abas-textos"></div>
+    </section>
     <footer>
         <p>© All Rigths Reserved - Portifólio 2025</p>
     </footer>
@@ -84,7 +83,7 @@
                         return false;
                     }
                     adicionaArray(mat_tarefas, { atividade, data });
-                    recarregaAbas(mat_tarefas);
+                    recarregaLista(mat_tarefas);
                 }
             })
         }

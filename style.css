@@ -104,78 +104,60 @@ footer {
     text-align: center;
 }
 
-.abas-container {
+.botoes-container {
     position: relative;
     width: 100%;
-    margin: 1em 0;
+    max-width: 1200px;
+    margin: 20px 0;
 }
 
-.botoes-scroll {
-    display: flex;
+.botoes-wrapper {
     overflow-x: auto;
     scroll-behavior: smooth;
-    /* remove scroll bar visível, opcional */
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
-.botoes-scroll::-webkit-scrollbar {
-    display: none;
+.botoes-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
 }
 
-.botao {
-    flex: 0 0 auto;
-    /* para não encolher */
-    margin-right: 0.5em;
-    font-family: 'Chakra Petch', sans-serif;
-    background-color: var(--botao-inativo);
-    color: var(--branco);
-    padding: 0.75em 1.25em;
-    border: 2px solid var(--botao-ativo);
-    border-bottom-width: 4px;
-    border-radius: 20px 20px 0 0;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background-color 0.2s;
-}
-
-.botao.ativo {
-    background-color: var(--botao-ativo);
-    border-bottom-color: var(--verde);
+.botoes {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    transition: transform 0.3s ease;
 }
 
 .scroll-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 2em;
-    height: 2em;
     background: var(--botao-ativo);
-    color: var(--branco);
+    color: white;
     border: none;
-    border-radius: 50%;
+    padding: 10px;
     cursor: pointer;
-    z-index: 10;
-}
-
-#scroll-left {
-    left: 0;
-}
-
-#scroll-right {
-    right: 0;
-}
-
-.abas-textos {
-    background-color: var(--texto-fundo);
-    padding: 2em;
-    border-radius: 0 0 40px 40px;
-}
-
-.aba-conteudo {
+    border-radius: 50%;
+    z-index: 1;
     display: none;
 }
 
-.aba-conteudo.ativo {
+.scroll-btn.left {
+    left: -30px;
+}
+
+.scroll-btn.right {
+    right: -30px;
+}
+
+.botoes-container:hover .scroll-btn {
     display: block;
+}
+
+/* Mantenha os estilos originais dos botões */
+.botao {
+    flex-shrink: 0;
+    width: 200px;
+    /* Restante dos estilos originais */
 }

@@ -1,88 +1,71 @@
 let mat_tarefas = [];
 
 // função que cria abas e conteúdos
-function recarregaAbas(array) {
-  const botoesContainer = document.querySelector('.botoes-scroll');
-  const textosContainer = document.querySelector('.abas-textos');
+function recarregaLista(nome_array) {
+  const botoesContainer = document.querySelector('.botoes');
+  const abasContainer = document.querySelector('.abas-textos');
+  
+  // Limpa conteúdo anterior
   botoesContainer.innerHTML = '';
-  textosContainer.innerHTML = '';
-
-  array.forEach((tarefa, idx) => {
-    // cria botão da aba
-    const btn = document.createElement('button');
-    btn.className = 'botao';
-    btn.textContent = tarefa.atividade;
-    btn.dataset.index = idx;
-    botoesContainer.appendChild(btn);
-
-    // cria conteúdo da aba
-    const div = document.createElement('div');
-    div.className = 'aba-conteudo';
-    div.innerHTML = `
-      <h3 class="aba-conteudo-titulo-principal">${tarefa.atividade}</h3>
-      <h4 class="aba-conteudo-titulo-secundario">Data de entrega</h4>
-      <p class="contador">${tarefa.data}</p>
-    `;
-    textosContainer.appendChild(div);
+  abasContainer.innerHTML = '';
+  
+  // Cria novos elementos
+  nome_array.forEach((tarefa, index) => {
+      // Cria botão
+      const botao = document.createElement('button');
+      botao.className = `botao ${index === 0 ? 'ativo' : ''}`;
+      botao.textContent = tarefa.atividade;
+      botao.dataset.index = index;
+      
+      // Cria aba de conteúdo
+      const aba = document.createElement('div');
+      aba.className = `aba-conteudo ${index === 0 ? 'ativo' : ''}`;
+      aba.innerHTML = `
+          <h3 class="aba-conteudo-titulo-principal">${tarefa.atividade}</h3>
+          <h4 class="aba-conteudo-titulo-secundario">Data: ${tarefa.data}</h4>
+          <div class="contador">${calculaTempo(new Date(tarefa.data))}</div>
+      `;
+      
+      // Adiciona eventos
+      botao.addEventListener('click', () => {
+          document.querySelectorAll('.botao').forEach(b => b.classList.remove('ativo'));
+          document.querySelectorAll('.aba-conteudo').forEach(a => a.classList.remove('ativo'));
+          botao.classList.add('ativo');
+          aba.classList.add('ativo');
+      });
+      
+      botoesContainer.appendChild(botao);
+      abasContainer.appendChild(aba);
   });
-
-  // ativa a primeira aba por padrão, se existir
-  if (array.length > 0) {
-    botoesContainer.firstElementChild.classList.add('ativo');
-    textosContainer.firstElementChild.classList.add('ativo');
-  }
-
-  // vincula evento de clique em todos os botões
-  botoesContainer.querySelectorAll('.botao').forEach(btn => {
-    btn.addEventListener('click', () => {
-      // remove todos os estados ativos
-      botoesContainer.querySelectorAll('.botao').forEach(b => b.classList.remove('ativo'));
-      textosContainer.querySelectorAll('.aba-conteudo').forEach(c => c.classList.remove('ativo'));
-
-      // ativa o clicado
-      btn.classList.add('ativo');
-      textosContainer.children[btn.dataset.index].classList.add('ativo');
-    });
-  });
+  
+  // Atualiza cronômetro
+  atualizaCronometro();
 }
 
-// scroll com as setas
-document.getElementById('scroll-left').addEventListener('click', () => {
-  document.querySelector('.botoes-scroll').scrollBy({ left: -200, behavior: 'smooth' });
-});
-document.getElementById('scroll-right').addEventListener('click', () => {
-  document.querySelector('.botoes-scroll').scrollBy({ left:  200, behavior: 'smooth' });
-});
-
-// === seu SweetAlert para adicionar ===
-document.getElementById('btn-adicionar').addEventListener('click', () => {
-  Swal.fire({
-    title: 'Formulário',
-    html: `
-      <input type="text" id="atividade" class="swal2-input" placeholder="Atividade/Prova">
-      <input type="date" id="data" class="swal2-input" placeholder="Data de entrega">
-    `,
-    confirmButtonText: 'Adicionar Atividade',
-    focusConfirm: false,
-    didOpen: () => {
-      const popup = Swal.getPopup();
-      atividadeInput = popup.querySelector('#atividade');
-      dataInput     = popup.querySelector('#data');
-      atividadeInput.onkeyup = e => e.key === 'Enter' && Swal.clickConfirm();
-      dataInput.onkeyup      = e => e.key === 'Enter' && Swal.clickConfirm();
-    },
-    preConfirm: () => {
-      const atividade = atividadeInput.value.trim();
-      const data      = dataInput.value;
-      if (!atividade || !data) {
-        Swal.showValidationMessage('Por favor, preencha atividade e data');
-        return false;
-      }
-      mat_tarefas.push({ atividade, data });
-      recarregaAbas(mat_tarefas);
-    }
+document.querySelectorAll('.scroll-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+      const wrapper = document.querySelector('.botoes-wrapper');
+      const scrollAmount = 200; // Ajuste conforme necessário
+      wrapper.scrollBy({
+          left: btn.classList.contains('left') ? -scrollAmount : scrollAmount,
+          behavior: 'smooth'
+      });
   });
 });
+
+function calculaTempo(dataObjetivo) {
+  const tempoAtual = new Date();
+  const tempoFinal = dataObjetivo - tempoAtual;
+  
+  if (tempoFinal <= 0) return 'Prazo Finalizado';
+  
+  const segundos = Math.floor(tempoFinal / 1000 % 60);
+  const minutos = Math.floor(tempoFinal / 1000 / 60 % 60);
+  const horas = Math.floor(tempoFinal / 1000 / 60 / 60 % 24);
+  const dias = Math.floor(tempoFinal / 1000 / 60 / 60 / 24);
+  
+  return `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+}
 
 document.addEventListener('DOMContentLoaded', function() {
   // addEventListener -> ao carregar(DOMContentLoaded) a pagina(document) executa a função
