@@ -126,13 +126,20 @@ function calculaTempo(dataObjetivo) {
   
     if (diferenca <= 0) return 'Prazo Finalizado';
   
-    const horas = Math.floor(diferenca / (1000 * 60 * 60));
+    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
     const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
   
-    return `${horas}h ${minutos}m ${segundos}s`;
-} 
-
+    let resultado = '';
+    if (dias > 0) resultado += `${dias}d `;
+    if (horas > 0 || dias > 0) resultado += `${horas}h `;
+    if (minutos > 0 || horas > 0 || dias > 0) resultado += `${minutos}m `;
+    resultado += `${segundos}s`;
+  
+    return resultado.trim();
+}
+  
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
   subjectConfig = getSubjectConfig();
