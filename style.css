@@ -6,7 +6,6 @@
 body {
     margin: 0;
     padding: 0;
-    /* garante espaço para o footer fixo */
     padding-bottom: 60px;
 }
 
@@ -99,9 +98,6 @@ h1 {
     display: block;
 }
 
-/* REMOVIDO: .botoes-container, .botoes-wrapper, .scroll-btn e similares */
-
-/* Grid de cards em 3 colunas */
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -109,19 +105,17 @@ h1 {
     margin: 20px 0;
 }
 
-/* Estilo genérico (do original) */
 .botao {
     flex-shrink: 0;
     width: 200px;
-    /* Restante dos estilos originais */
 }
 
 /* Estilos dos cards */
 .card-item {
-    background: var(--botao-inativo);
-    border: 2px solid var(--botao-ativo);
+    border: 3px solid var(--cor-header);
+    box-shadow: 0 0 6px var(--cor-header);
     border-radius: 10px;
-    padding: 12px;               /* padding levemente menor */
+    padding: 12px;               
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: center;
@@ -132,27 +126,18 @@ h1 {
 }
 
 .card-item h4 {
-    font-size: 1.2em;            /* título um pouco maior */
+    font-size: 1.2em;         
     margin: 0 0 5px;
 }
 
-/* Highlight permanente no item ativo */
-.card-item.ativo {
-    border: 3px solid var(--cor-header);
-    box-shadow: 0 0 6px var(--cor-header);
-}
-
-/* Hover: só borda inferior no card */
-.card-item:hover {
+.card-item h4:hover {
     border-bottom: 3px solid var(--cor-header);
 }
 
 .contador-item {
     font-size: 0.9em;
-    color: var(--verde);
 }
 
-/* Mantido do original */
 .conteudo-principal {
     padding: 20px;
     max-width: 1200px;

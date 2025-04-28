@@ -54,11 +54,6 @@ function recarregaLista(nome_array) {
             <div class="contador-item">${calculaTempo(new Date(tarefa.data))}</div>
         `;
 
-        card.addEventListener('click', () => {
-            document.querySelectorAll('.card-item').forEach(c => c.classList.remove('ativo'));
-            card.classList.add('ativo');
-        });
-
         grid.appendChild(card);
     });
 
