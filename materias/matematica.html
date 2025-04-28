@@ -43,39 +43,11 @@
           Adicionar Atividades/Provas
         </button>
         <div class="botoes-grid"></div>
-      </section>
+    </section>
     <footer>
         <p>© All Rigths Reserved - Portifólio 2025</p>
     </footer>
     <script src="../script.js"></script>
-    <script>
-        function adicionarTarefa() {
-            Swal.fire({
-                title: 'Nova Atividade',
-                html: `
-            <input type="text" id="atividade" class="swal2-input" placeholder="Nome da atividade">
-            <input type="date" id="data" class="swal2-input">
-        `,
-                confirmButtonText: 'Adicionar',
-                preConfirm: () => {
-                    const atividade = Swal.getPopup().querySelector('#atividade').value;
-                    const data = Swal.getPopup().querySelector('#data').value;
-
-                    if (!atividade || !data) {
-                        Swal.showValidationMessage('Preencha todos os campos');
-                        return false;
-                    }
-
-                    if (adicionaArray(mat_tarefas, { atividade, data })) {
-                        recarregaLista(mat_tarefas);
-                    } else {
-                        Swal.showValidationMessage('Esta atividade já existe!');
-                        return false;
-                    }
-                }
-            });
-        }
-    </script>
 </body>
 
 </html>
