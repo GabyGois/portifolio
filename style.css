@@ -130,10 +130,6 @@ h1 {
     margin: 0 0 5px;
 }
 
-.card-item h4:hover {
-    border-bottom: 3px solid var(--cor-header);
-}
-
 .contador-item {
     font-size: 0.9em;
 }
