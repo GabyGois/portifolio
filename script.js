@@ -1,11 +1,10 @@
-// script.js
-
 // Arrays de tarefas por matéria
 const mat_tarefas = [];
 const fis_tarefas = [];
 const qui_tarefas = [];
 const bio_tarefas = [];
 
+// Guardará a configuração da página atual
 let subjectConfig;
 
 function formatDateBR(isoDate) {
@@ -13,6 +12,7 @@ function formatDateBR(isoDate) {
   return `${d}/${m}/${y}`;
 }
 
+/* Detecta página atual e retorna o array, cor e gridColumns */
 function getSubjectConfig() {
   const path = window.location.pathname;
   if (path.includes('fisica.html')) {
@@ -42,6 +42,11 @@ function adicionaArray(nome_array, tarefa) {
   return false;
 }
 
+function removeArray(nome_array, index) {
+  nome_array.splice(index, 1);
+}
+
+/* Abre o modal Swal para adicionar nova tarefa */
 function adicionarTarefa() {
   Swal.fire({
     title: 'Nova Atividade',
@@ -57,7 +62,6 @@ function adicionarTarefa() {
         Swal.showValidationMessage('Preencha todos os campos');
         return false;
       }
-      // Insere no array da matéria detectada
       if (adicionaArray(subjectConfig.array, { atividade, data })) {
         recarregaLista(subjectConfig.array);
       } else {
@@ -78,16 +82,24 @@ function recarregaLista(nome_array) {
   `;
   const grid = container.querySelector('.cards-grid');
 
-  nome_array.forEach(tarefa => {
+  nome_array.forEach((tarefa, idx) => {
     const card = document.createElement('div');
     card.className = 'card-item';
     card.dataset.date = tarefa.data;
 
     card.innerHTML = `
+      <i class="fa fa-trash delete-icon"></i>
       <h4>${tarefa.atividade}</h4>
       <p>Data: ${formatDateBR(tarefa.data)}</p>
       <div class="contador-item">${calculaTempo(new Date(tarefa.data))}</div>
     `;
+
+    // Deleta ao clicar na lixeira
+    card.querySelector('.delete-icon').addEventListener('click', (e) => {
+      e.stopPropagation();
+      removeArray(subjectConfig.array, idx);
+      recarregaLista(subjectConfig.array);
+    });
 
     grid.appendChild(card);
   });
@@ -120,7 +132,7 @@ function calculaTempo(dataObjetivo) {
   return `${dias}d ${horas}h ${minutos}m ${segundos}s`;
 }
 
-// Ao carregar a página, configura dados e renderiza
+// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
   subjectConfig = getSubjectConfig();
 
@@ -130,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
   header.style.gridTemplateColumns = subjectConfig.gridCols;
   document.documentElement.style.setProperty('--cor-header', subjectConfig.cor);
 
-  // Monta a lista inicial e vincula o botão
   recarregaLista(subjectConfig.array);
   document.getElementById('btn-adicionar').addEventListener('click', adicionarTarefa);
 });

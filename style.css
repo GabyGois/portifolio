@@ -123,6 +123,21 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+}
+
+/* Lixeira no canto superior direito */
+.delete-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: var(--cor-header);
+    transition: color 0.2s ease;
+}
+.delete-icon:hover {
+    color: #e74c3c;
 }
 
 .card-item h4 {
