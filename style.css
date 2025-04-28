@@ -1,5 +1,11 @@
 :root {
     --cor-header: #333; /* cor padrão (index) */
+    --cor-de-fundo: #1E1E1E;
+    --verde: #6FFF57;
+    --branco: #FFFFFF;
+    --botao-ativo: #3A375E;
+    --botao-inativo: rgba(58, 55, 94, 0.5);
+    --texto-fundo: rgba(58, 55, 94, 0.3);
 }
 
 body {
@@ -100,4 +106,68 @@ footer {
     background-color: var(--cor-header);
     color: white;
     text-align: center;
+}
+
+.tabs {
+    position: relative;
+    width: 100%;
+    margin-top: 1em;
+}
+  
+.botoes {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 0 2em;       
+    gap: 0.5em;
+}
+.botoes::-webkit-scrollbar { display: none; } /* esconde scrollbar nativo */
+  
+.botao {
+    background-color: var(--botao-inativo);
+    color: var(--branco);
+    padding: 0.5em 1em;
+    border: none;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom: 4px solid var(--botao-ativo);
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.botao.ativo {
+    background-color: var(--botao-ativo);
+    border-bottom: 4px solid var(--verde);
+}
+  
+.scroll-btn {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2em;
+    background: var(--cor-de-fundo);
+    border: none;
+    color: var(--verde);
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.scroll-left  { left: 0; }
+.scroll-right { right: 0; }
+  
+.abas-textos {
+    background-color: var(--texto-fundo);
+    border-radius: 0 0 40px 40px;
+    padding: 1.5em;
+    margin-top: -4px;
+}
+.aba-conteudo {
+    display: none;
+}
+.aba-conteudo.ativo {
+    display: block;
+}
+.aba-conteudo p {
+    margin: 0.5em 0;
 }

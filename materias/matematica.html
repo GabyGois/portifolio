@@ -39,9 +39,15 @@
         </div>
     </header>
     <section id="tarefas">
-        <button onclick="adicionarTarefa('matematica')">Adicionar Atividades/Provas</button>
-        <br>
-        <div id="lista"></div>
+        <button id="btn-adicionar" class="botao-adicionar">Adicionar Atividades/Provas</button>
+      
+        <div class="tabs">
+          <button class="scroll-btn scroll-left">&lt;</button>
+          <div class="botoes" id="tabs-buttons"></div>
+          <button class="scroll-btn scroll-right">&gt;</button>
+      
+          <div class="abas-textos" id="tabs-contents"></div>
+        </div>
     </section>
     <footer>
         <p>© All Rigths Reserved - Portifólio 2025</p>
@@ -65,15 +71,15 @@
                     dataInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
                 },
                 preConfirm: () => {
-                    const atividade = atividadeInput.value.trim()
-                    const data       = dataInput.value
+                    const atividade = atividadeInput.value.trim();
+                    const data      = dataInput.value;
                     if (!atividade || !data) {
-                        Swal.showValidationMessage('Por favor, preencha atividade e data')
-                        return false
+                        Swal.showValidationMessage('Por favor, preencha atividade e data');
+                        return false;
                     }
-                    adicionaArray(mat_tarefas, { atividade, data })
-                    recarregaLista(mat_tarefas)
-                },
+                    adicionaArray(mat_tarefas, { atividade, data });
+                    recarregaAbas(mat_tarefas);
+                }
             })
         }
     </script>
