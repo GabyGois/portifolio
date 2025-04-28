@@ -43,18 +43,42 @@
           Adicionar Atividades/Provas
         </button>
     
-        <div class="tabs">
-          <button class="scroll-btn scroll-left">&lt;</button>
-          <div class="botoes" id="tabs-buttons"></div>
-          <button class="scroll-btn scroll-right">&gt;</button>
-    
-          <div class="abas-textos" id="tabs-contents"></div>
-        </div>
+        <div id="lista"></div>
     </section>
     <footer>
         <p>© All Rigths Reserved - Portifólio 2025</p>
     </footer>
     <script src="../script.js"></script>
+    <script>
+        function adicionarTarefa(materia) {
+            Swal.fire({
+                title: 'Formulário',
+                html: `
+                <input type="text" id="atividade" class="swal2-input" placeholder="Atividade/Prova">
+                <input type="date" id="data" class="swal2-input" placeholder="Data de entrega">
+            `,
+                confirmButtonText: 'Adicionar Atividade',
+                focusConfirm: false,
+                didOpen: () => {
+                    const popup = Swal.getPopup()
+                    atividadeInput = popup.querySelector('#atividade')
+                    dataInput = popup.querySelector('#data')
+                    atividadeInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+                    dataInput.onkeyup = (event) => event.key === 'Enter' && Swal.clickConfirm()
+                },
+                preConfirm: () => {
+                    const atividade = atividadeInput.value.trim();
+                    const data      = dataInput.value;
+                    if (!atividade || !data) {
+                        Swal.showValidationMessage('Por favor, preencha atividade e data');
+                        return false;
+                    }
+                    adicionaArray(mat_tarefas, { atividade, data });
+                    recarregaAbas(mat_tarefas);
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>

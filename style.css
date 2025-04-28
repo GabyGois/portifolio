@@ -1,14 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap');
-
 :root {
-    --cor-header: #333;
-    /* cor padrão (index) */
-    --cor-de-fundo: #1E1E1E;
-    --verde: #6FFF57;
-    --branco: #FFFFFF;
-    --botao-ativo: #3A375E;
-    --botao-inativo: rgba(58, 55, 94, 0.5);
-    --texto-fundo: rgba(58, 55, 94, 0.3);
+    --cor-header: #333; /* cor padrão (index) */
 }
 
 body {
@@ -28,28 +19,28 @@ h1 {
 }
 
 .materia-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex;              
+    justify-content: center;    
+    align-items: center;       
 }
-
+  
 .materia-links ul {
     list-style: none;
-    gap: 125px;
-    margin: 0 auto;
-    display: flex;
-    text-decoration: none;
+    gap: 125px;                  
+    margin: 0 auto;  
+    display: flex;  
+    text-decoration: none;  
 }
 
 .materia-links a {
     color: #fff;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 20px;  
 }
 
 .materia-links a:hover {
     text-decoration: underline;
-    font-size: 22px;
+    font-size: 22px; 
 }
 
 .hamburguer {
@@ -96,12 +87,11 @@ h1 {
 .menu li:hover {
     background: #444;
 }
-
 #menu-toggle {
     display: none;
 }
 
-#menu-toggle:checked+.menu-btn+.menu {
+#menu-toggle:checked + .menu-btn + .menu {
     display: block;
 }
 
@@ -110,112 +100,4 @@ footer {
     background-color: var(--cor-header);
     color: white;
     text-align: center;
-}
-
-/* — estrutura geral — */
-.tabs {
-    position: relative;
-    max-width: 800px;
-    /* controla largura total do componente */
-    margin: 1.5em auto;
-    /* centro horizontal + espaçamento vertical */
-}
-
-/* — container de botões — */
-.botoes {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    gap: 0.5em;
-    padding: 0.5em 2.5em;
-    /* respiram por baixo dos scroll-btns */
-    scrollbar-width: none;
-    /* firefox */
-}
-
-.botoes::-webkit-scrollbar {
-    display: none;
-}
-
-/* chrome/safari */
-
-/* cada botão “aba” */
-.botao {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    background-color: var(--botao-inativo);
-    color: var(--branco);
-    padding: 0.75em 1.5em;
-    border: none;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
-    border-bottom: 4px solid var(--botao-ativo);
-    cursor: pointer;
-    white-space: nowrap;
-    font-size: 1rem;
-    transition: background 0.2s, border-color 0.2s;
-}
-
-.botao.ativo {
-    background-color: var(--botao-ativo);
-    border-bottom-color: var(--verde);
-}
-
-/* — botões de scroll — */
-.scroll-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 2.2em;
-    height: 2.2em;
-    background: rgba(30, 30, 30, 0.7);
-    border: none;
-    border-radius: 50%;
-    color: var(--verde);
-    font-size: 1.2em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.2s;
-    z-index: 10;
-}
-
-.tabs:hover .scroll-btn {
-    opacity: 1;
-}
-
-.scroll-left {
-    left: 0.2em;
-}
-
-.scroll-right {
-    right: 0.2em;
-}
-
-/* — conteúdo das abas — */
-.abas-textos {
-    max-width: 800px;
-    margin: -4px auto 0;
-    /* “encaixa” embaixo do botão ativo */
-    background-color: var(--texto-fundo);
-    border-radius: 0 0 40px 40px;
-    padding: 1.5em;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-.aba-conteudo {
-    display: none;
-    color: var(--branco);
-}
-
-.aba-conteudo.ativo {
-    display: block;
-}
-
-.aba-conteudo p {
-    margin: 0.5em 0;
-    line-height: 1.4;
 }
