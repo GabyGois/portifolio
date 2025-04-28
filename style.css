@@ -1,3 +1,5 @@
+/* style.css */
+
 :root {
     --cor-header: #333;
     /* cor padrão (index) */
@@ -8,6 +10,7 @@ body {
     padding: 0;
 }
 
+/* === Header e navegação === */
 header {
     padding: 15px;
     background-color: var(--cor-header);
@@ -44,6 +47,7 @@ h1 {
     font-size: 22px;
 }
 
+/* === Menu hamburguer === */
 .hamburguer {
     position: relative;
 }
@@ -93,10 +97,11 @@ h1 {
     display: none;
 }
 
-#menu-toggle:checked+.menu-btn+.menu {
+#menu-toggle:checked + .menu-btn + .menu {
     display: block;
 }
 
+/* === Footer === */
 footer {
     padding: 15px;
     background-color: var(--cor-header);
@@ -104,78 +109,16 @@ footer {
     text-align: center;
 }
 
-.botoes-container {
-    position: relative;
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px 0;
-}
-
-.botoes-wrapper {
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
-.botoes-wrapper::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
-}
-
-.botoes {
-    display: flex;
-    gap: 10px;
-    padding: 10px 0;
-    transition: transform 0.3s ease;
-}
-
-.scroll-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--botao-ativo);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-    z-index: 1;
-    display: none;
-}
-
-.scroll-btn.left {
-    left: -30px;
-}
-
-.scroll-btn.right {
-    right: -30px;
-}
-
-.botoes-container:hover .scroll-btn {
-    display: block;
-}
-
-/* Mantenha os estilos originais dos botões */
-.botao {
-    flex-shrink: 0;
-    width: 200px;
-    /* Restante dos estilos originais */
-}
-
-.conteudo-principal {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.botoes-grid {
+/* === Grid de cards em 3 colunas === */
+.cards-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin: 20px 0;
 }
 
-.botao-item {
+/* === Estilos dos cards === */
+.card-item {
     background: var(--botao-inativo);
     border: 2px solid var(--botao-ativo);
     border-radius: 10px;
@@ -189,30 +132,26 @@ footer {
     justify-content: space-between;
 }
 
-.botao-item.ativo {
+.card-item.ativo {
     background: var(--botao-ativo);
     border-color: var(--verde);
     box-shadow: 0 0 10px rgba(111, 255, 87, 0.3);
 }
 
+/* === Temporizadores dentro dos cards === */
 .contador-item {
     font-size: 0.9em;
     color: var(--verde);
 }
 
-.detalhes-container {
-    background: var(--texto-fundo);
+/* === Container principal === */
+.conteudo-principal {
     padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    min-height: 150px;
-    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.detalhes-container.ativo {
-    display: block;
-}
-
+/* === Botão de adicionar nova tarefa === */
 .botao-adicionar {
     background-color: var(--cor-header);
     color: white;
