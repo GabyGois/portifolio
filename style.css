@@ -161,3 +161,36 @@ footer {
     width: 200px;
     /* Restante dos estilos originais */
 }
+
+.botoes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px 0;
+}
+
+.botao-item {
+    background: var(--botao-inativo);
+    border: 2px solid var(--botao-ativo);
+    border-radius: 15px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.botao-item.ativo {
+    background: var(--botao-ativo);
+    border-color: var(--verde);
+    transform: scale(1.05);
+}
+
+.detalhes-container {
+    background: var(--texto-fundo);
+    padding: 25px;
+    border-radius: 15px;
+    margin-top: 20px;
+    min-height: 200px;
+}
