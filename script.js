@@ -1,104 +1,91 @@
 let mat_tarefas = [];
 
 function adicionaArray(nome_array, tarefa) {
-  nome_array.push(tarefa)
+    // Verifica se a tarefa já existe
+    const existe = nome_array.some(item => 
+        item.atividade === tarefa.atividade && 
+        item.data === tarefa.data
+    );
+    
+    if (!existe) {
+        nome_array.push(tarefa);
+        return true;
+    }
+    return false;
 }
 
-// função que cria abas e conteúdos
 function recarregaLista(nome_array) {
-  const container = document.querySelector('.conteudo-principal');
-  container.innerHTML = `
-      <button id="btn-adicionar" class="botao-adicionar">
-          Adicionar Atividades/Provas
-      </button>
-      <div class="botoes-grid"></div>
-      <div class="detalhes-container"></div>
-  `;
+    const container = document.querySelector('.conteudo-principal');
+    container.innerHTML = `
+        <button id="btn-adicionar" class="botao-adicionar">
+            Adicionar Atividades/Provas
+        </button>
+        <div class="botoes-grid"></div>
+        <div class="detalhes-container"></div>
+    `;
 
-  const grid = document.querySelector('.botoes-grid');
-  const detalhes = document.querySelector('.detalhes-container');
+    const grid = container.querySelector('.botoes-grid');
+    const detalhes = container.querySelector('.detalhes-container');
 
-  nome_array.forEach((tarefa, index) => {
-      const botao = document.createElement('div');
-      botao.className = `botao-item ${index === 0 ? 'ativo' : ''}`;
-      botao.innerHTML = `
-          <h3>${tarefa.atividade}</h3>
-          <p>Data: ${tarefa.data}</p>
-          <div class="contador">${calculaTempo(new Date(tarefa.data))}</div>
-      `;
+    nome_array.forEach((tarefa, index) => {
+        const botao = document.createElement('div');
+        botao.className = 'botao-item';
+        botao.innerHTML = `
+            <h4>${tarefa.atividade}</h4>
+            <p>Data: ${tarefa.data}</p>
+            <div class="contador-item">${calculaTempo(new Date(tarefa.data))}</div>
+        `;
 
-      botao.addEventListener('click', () => {
-          document.querySelectorAll('.botao-item').forEach(b => b.classList.remove('ativo'));
-          botao.classList.add('ativo');
-          atualizarDetalhes(tarefa);
-      });
+        botao.addEventListener('click', () => {
+            // Remove a classe ativo de todos
+            document.querySelectorAll('.botao-item').forEach(b => b.classList.remove('ativo'));
+            document.querySelectorAll('.detalhes-container').forEach(d => d.classList.remove('ativo'));
+            
+            // Adiciona a classe ativo ao selecionado
+            botao.classList.add('ativo');
+            detalhes.classList.add('ativo');
+            
+            // Atualiza detalhes
+            detalhes.innerHTML = `
+                <h3>${tarefa.atividade}</h3>
+                <p>Data de Entrega: ${tarefa.data}</p>
+                <div class="contador-detalhe">${calculaTempo(new Date(tarefa.data))}</div>
+            `;
+        });
 
-      grid.appendChild(botao);
-  });
+        grid.appendChild(botao);
+    });
 
-  if (nome_array.length > 0) {
-      atualizarDetalhes(nome_array[0]);
-  }
+    // Configura o botão de adicionar
+    container.querySelector('#btn-adicionar').addEventListener('click', adicionarTarefa);
 
-  // Reconectar evento ao botão
-  document.getElementById('btn-adicionar').addEventListener('click', adicionarTarefa);
-
-  // Iniciar cronômetro
-  iniciarAtualizacaoAutomatica();
+    // Inicia atualização automática
+    iniciarAtualizacao();
 }
 
-function atualizarDetalhes(tarefa) {
-  const detalhes = document.querySelector('.detalhes-container');
-  detalhes.innerHTML = `
-      <h3 class="aba-conteudo-titulo-principal">${tarefa.atividade}</h3>
-      <h4 class="aba-conteudo-titulo-secundario">Data: ${tarefa.data}</h4>
-      <div class="contador-detalhe">${calculaTempo(new Date(tarefa.data))}</div>
-  `;
+function iniciarAtualizacao() {
+    setInterval(() => {
+        document.querySelectorAll('.contador-item, .contador-detalhe').forEach(elemento => {
+            const data = elemento.closest('.botao-item')?.querySelector('p')?.textContent.split(': ')[1];
+            if (data) {
+                elemento.textContent = calculaTempo(new Date(data));
+            }
+        });
+    }, 1000);
 }
-
-function iniciarAtualizacaoAutomatica() {
-  setInterval(() => {
-      document.querySelectorAll('.contador').forEach((elemento, index) => {
-          const tarefa = mat_tarefas[index];
-          if (tarefa) {
-              elemento.textContent = calculaTempo(new Date(tarefa.data));
-          }
-      });
-      
-      const detalhe = document.querySelector('.contador-detalhe');
-      if (detalhe) {
-          const tarefaAtiva = document.querySelector('.botao-item.ativo');
-          if (tarefaAtiva) {
-              const index = Array.from(document.querySelectorAll('.botao-item')).indexOf(tarefaAtiva);
-              detalhe.textContent = calculaTempo(new Date(mat_tarefas[index].data));
-          }
-      }
-  }, 1000);
-}
-
-document.querySelectorAll('.scroll-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-      const wrapper = document.querySelector('.botoes-wrapper');
-      const scrollAmount = 200; // Ajuste conforme necessário
-      wrapper.scrollBy({
-          left: btn.classList.contains('left') ? -scrollAmount : scrollAmount,
-          behavior: 'smooth'
-      });
-  });
-});
 
 function calculaTempo(dataObjetivo) {
-  const agora = new Date();
-  const diferenca = dataObjetivo - agora;
-  
-  if (diferenca < 0) return 'Prazo Finalizado';
-  
-  const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-  const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-  const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+    const agora = new Date();
+    const diferenca = dataObjetivo - agora;
+    
+    if (diferenca < 0) return 'Prazo Finalizado';
+    
+    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
 
-  return `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+    return `${dias}d ${horas}h ${minutos}m ${segundos}s`;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
