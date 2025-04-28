@@ -1,5 +1,9 @@
 let mat_tarefas = [];
 
+function adicionaArray(nome_array, tarefa) {
+  nome_array.push(tarefa)
+}
+
 // função que cria abas e conteúdos
 function recarregaLista(nome_array) {
   const botoesContainer = document.querySelector('.botoes');
