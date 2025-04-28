@@ -121,7 +121,8 @@ function iniciarAtualizacao() {
 
 function calculaTempo(dataObjetivo) {
     const agora = new Date();
-    const diferenca = dataObjetivo - agora;
+    const dataObjetivoCorrigida = new Date(dataObjetivo.getTime() + (3 * 60 * 60 * 1000)); // soma 3h
+    const diferenca = dataObjetivoCorrigida - agora;
   
     if (diferenca <= 0) return 'Prazo Finalizado';
   
@@ -130,7 +131,7 @@ function calculaTempo(dataObjetivo) {
     const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
   
     return `${horas}h ${minutos}m ${segundos}s`;
-  }  
+} 
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', () => {
