@@ -1,16 +1,18 @@
+// Arrays de tarefas por matéria
 const mat_tarefas = [];
 const fis_tarefas = [];
 const qui_tarefas = [];
 const bio_tarefas = [];
 
+// Guardará a configuração da página atual
 let subjectConfig;
-let contadorInterval;
 
 function formatDateBR(isoDate) {
   const [y, m, d] = isoDate.split('-');
   return `${d}/${m}/${y}`;
 }
 
+/* Detecta página atual e retorna o array, cor e gridColumns */
 function getSubjectConfig() {
   const path = window.location.pathname;
   if (path.includes('fisica.html')) {
@@ -28,42 +30,39 @@ function getSubjectConfig() {
   return { array: [], cor: '#333', gridCols: '95% 5%' };
 }
 
-function adicionaArray(lista, tarefa) {
-  const existe = lista.some(item =>
+function adicionaArray(nome_array, tarefa) {
+  const existe = nome_array.some(item =>
     item.atividade === tarefa.atividade &&
     item.data === tarefa.data
   );
   if (!existe) {
-    lista.push(tarefa);
+    nome_array.push(tarefa);
     return true;
   }
   return false;
 }
 
-function removeArray(lista, index) {
-  lista.splice(index, 1);
+function removeArray(nome_array, index) {
+  nome_array.splice(index, 1);
 }
 
+/* Abre o modal Swal para adicionar nova tarefa */
 function adicionarTarefa() {
   Swal.fire({
     title: 'Nova Atividade',
     html: `
-      <input type="text" id="atividade" class="swal2-input" placeholder="Nome da atividade" autofocus>
+      <input type="text" id="atividade" class="swal2-input" placeholder="Nome da atividade">
       <input type="date" id="data" class="swal2-input">
     `,
     confirmButtonText: 'Adicionar',
     preConfirm: () => {
-      const atividade = Swal.getPopup().querySelector('#atividade').value.trim();
+      const atividade = Swal.getPopup().querySelector('#atividade').value;
       const data = Swal.getPopup().querySelector('#data').value;
-
       if (!atividade || !data) {
         Swal.showValidationMessage('Preencha todos os campos');
         return false;
       }
-
-      const novaTarefa = { atividade, data };
-
-      if (adicionaArray(subjectConfig.array, novaTarefa)) {
+      if (adicionaArray(subjectConfig.array, { atividade, data })) {
         recarregaLista(subjectConfig.array);
       } else {
         Swal.showValidationMessage('Esta atividade já existe!');
@@ -73,7 +72,7 @@ function adicionarTarefa() {
   });
 }
 
-function recarregaLista(lista) {
+function recarregaLista(nome_array) {
   const container = document.querySelector('.conteudo-principal');
   container.innerHTML = `
     <button id="btn-adicionar" class="botao-adicionar">
@@ -81,10 +80,9 @@ function recarregaLista(lista) {
     </button>
     <div class="cards-grid"></div>
   `;
-
   const grid = container.querySelector('.cards-grid');
 
-  lista.forEach((tarefa, idx) => {
+  nome_array.forEach((tarefa, idx) => {
     const card = document.createElement('div');
     card.className = 'card-item';
     card.dataset.date = tarefa.data;
@@ -96,6 +94,7 @@ function recarregaLista(lista) {
       <div class="contador-item">${calculaTempo(new Date(tarefa.data))}</div>
     `;
 
+    // Deleta ao clicar na lixeira
     card.querySelector('.delete-icon').addEventListener('click', (e) => {
       e.stopPropagation();
       removeArray(subjectConfig.array, idx);
@@ -105,15 +104,14 @@ function recarregaLista(lista) {
     grid.appendChild(card);
   });
 
-  document.getElementById('btn-adicionar').addEventListener('click', adicionarTarefa);
+  container.querySelector('#btn-adicionar')
+           .addEventListener('click', adicionarTarefa);
 
   iniciarAtualizacao();
 }
 
 function iniciarAtualizacao() {
-  if (contadorInterval) clearInterval(contadorInterval);
-
-  contadorInterval = setInterval(() => {
+  setInterval(() => {
     document.querySelectorAll('.contador-item').forEach(el => {
       const raw = el.closest('.card-item').dataset.date;
       el.textContent = calculaTempo(new Date(raw));
@@ -122,13 +120,36 @@ function iniciarAtualizacao() {
 }
 
 function calculaTempo(dataObjetivo) {
-  const agora = new Date();
-  const dataCorrigida = new Date(dataObjetivo.getTime() + (3 * 60 * 60 * 1000)); // +3h
-  const diff = dataCorrigida - agora;
+    const agora = new Date();
+    const dataObjetivoCorrigida = new Date(dataObjetivo.getTime() + (3 * 60 * 60 * 1000)); // soma 3h
+    const diferenca = dataObjetivoCorrigida - agora;
+  
+    if (diferenca <= 0) return 'Prazo Finalizado';
+  
+    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+  
+    let resultado = '';
+    if (dias > 0) resultado += `${dias}d `;
+    if (horas > 0 || dias > 0) resultado += `${horas}h `;
+    if (minutos > 0 || horas > 0 || dias > 0) resultado += `${minutos}m `;
+    resultado += `${segundos}s`;
+  
+    return resultado.trim();
+}
+  
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+  subjectConfig = getSubjectConfig();
 
-  if (diff <= 0) return 'Prazo Finalizado';
+  // Ajusta o header
+  const header = document.querySelector('header');
+  header.style.backgroundColor = subjectConfig.cor;
+  header.style.gridTemplateColumns = subjectConfig.gridCols;
+  document.documentElement.style.setProperty('--cor-header', subjectConfig.cor);
 
-  const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const
+  recarregaLista(subjectConfig.array);
+  document.getElementById('btn-adicionar').addEventListener('click', adicionarTarefa);
+});
