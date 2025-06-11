@@ -3,35 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portifólio de Estudos</title>
+    <title>Portfólio de Estudos</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
-        <div>
-            <h1>Portifólio de Estudos</h1>
-        </div>
-        <div class="botao-menu">
-            <nav class="hamburguer">
-                <input type="checkbox" id="menu-toggle">
-                <label for="menu-toggle" class="menu-btn">
-                    <i class="fa fa-bars"></i>
-                </label>
-                <ul class="menu">
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./materias/matematica.html">Matemática</a></li>
-                    <li><a href="./materias/fisica.html">Física</a></li>
-                    <li><a href="./materias/quimica.html">Quimica</a></li>
-                    <li><a href="./materias/biologia.html">Biologia</a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1>Portfólio de Estudos</h1>
+
+        <nav class="hamburguer">
+            <input type="checkbox" id="menu-toggle" aria-controls="menu" aria-expanded="false">
+            <label for="menu-toggle" class="menu-btn" aria-label="Abrir menu de navegação">
+                <i class="fa fa-bars"></i>
+            </label>
+            <ul class="menu" id="menu">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./materias/matematica.html">Matemática</a></li>
+                <li><a href="./materias/fisica.html">Física</a></li>
+                <li><a href="./materias/quimica.html">Química</a></li>
+                <li><a href="./materias/biologia.html">Biologia</a></li>
+            </ul>
+        </nav>
     </header>
-    <main></main>
+
+    <main>
+        <!-- Conteúdo principal aqui -->
+    </main>
+
     <footer>
-        <p>© All Rigths Reserved - Portifólio 2025</p>
+        <p>© All Rights Reserved - Portfólio 2025</p>
     </footer>
+
     <script src="./script.js"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta name="description" content="Portfólio de estudos com matérias como Matemática, Física, Química e Biologia.">
+
 </body>
 </html>
