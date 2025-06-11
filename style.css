@@ -1,5 +1,5 @@
 :root {
-    --cor-header: #333;
+    --cor-header: #c41313;
     /* cor padrão (index) */
 }
 
@@ -35,7 +35,7 @@ h1 {
 }
 
 .materia-links a {
-    color: #fff;
+    color: #03ccd3;
     text-decoration: none;
     font-size: 20px;
 }
@@ -81,13 +81,13 @@ h1 {
 }
 
 .menu li a {
-    color: white;
+    color: rgb(248, 182, 248);
     text-decoration: none;
     display: block;
 }
 
 .menu li:hover {
-    background: #444;
+    background: #0e0927;
 }
 
 #menu-toggle {
